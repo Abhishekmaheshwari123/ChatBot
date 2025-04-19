@@ -54,6 +54,7 @@ Copy
 Edit
 git clone https://github.com/Abhishekmaheshwari123/ChatBot.git
 cd ChatBot
+
 2. Set Up a Virtual Environment (Recommended)
 bash
 Copy
@@ -65,6 +66,7 @@ venv\Scripts\activate
 # For Mac/Linux:
 python3 -m venv venv
 source venv/bin/activate
+
 3. Install the Required Dependencies
 bash
 Copy
@@ -82,12 +84,15 @@ scikit-learn
 transformers
 torch
 # any other libraries you're using
+
+
 4. Run the Application
 bash
 Copy
 Edit
 uvicorn main:app --reload
 main:app means you're telling uvicorn to look for the FastAPI app inside main.py.
+
 
 5. Visit in Browser
 Once running, open your browser and go to:
