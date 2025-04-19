@@ -45,5 +45,55 @@ ChatBot/
 
 
 ## How to Run
-```bash
+✅ Steps to Run This ChatBot Application Locally
+1. Clone the Repository
+Open terminal / PowerShell / Command Prompt:
+
+bash
+Copy
+Edit
+git clone https://github.com/Abhishekmaheshwari123/ChatBot.git
+cd ChatBot
+2. Set Up a Virtual Environment (Recommended)
+bash
+Copy
+Edit
+# For Windows:
+python -m venv venv
+venv\Scripts\activate
+
+# For Mac/Linux:
+python3 -m venv venv
+source venv/bin/activate
+3. Install the Required Dependencies
+bash
+Copy
+Edit
+pip install -r requirements.txt
+Make sure the requirements.txt file includes all necessary packages like:
+
+txt
+Copy
+Edit
+fastapi
+uvicorn
+numpy
+scikit-learn
+transformers
+torch
+# any other libraries you're using
+4. Run the Application
+bash
+Copy
+Edit
 uvicorn main:app --reload
+main:app means you're telling uvicorn to look for the FastAPI app inside main.py.
+
+5. Visit in Browser
+Once running, open your browser and go to:
+
+cpp
+Copy
+Edit
+http://127.0.0.1:8000
+You’ll see your application running!
