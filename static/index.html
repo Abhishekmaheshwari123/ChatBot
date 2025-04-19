@@ -246,15 +246,27 @@
 
       showTypingIndicator();
 
-      const res = await fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
+      let userId = localStorage.getItem("finmate_user_id");
+      if (!userId) {
+        userId = "user_" + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem("finmate_user_id", userId);
+      }
 
-      const data = await res.json();
-      removeTypingIndicator();
-      appendMessage(data.reply, "bot", "https://cdn-icons-png.flaticon.com/512/4712/4712035.png");
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, user_id: userId })
+        });
+
+        const data = await res.json();
+        removeTypingIndicator();
+        appendMessage(data.reply, "bot", "https://cdn-icons-png.flaticon.com/512/4712/4712035.png");
+      } catch (err) {
+        removeTypingIndicator();
+        appendMessage("⚠️ Oops! Something went wrong.", "bot", "https://cdn-icons-png.flaticon.com/512/4712/4712035.png");
+        console.error("Chat error:", err);
+      }
     }
 
     function toggleDarkMode() {
@@ -270,20 +282,12 @@
         text += `${sender}: ${bubble}\n`;
       });
 
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "chat_history.txt";
-      a.click();
-      URL.revokeObjectURL(url);
+      const blob = new Blob([text], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "finmate-chat-history.txt";
+      link.click();
     }
-
-    userInput.addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
-        sendMessage();
-      }
-    });
   </script>
 </body>
 </html>
